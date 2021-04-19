@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+	footer{
+		display: none;
+	}
+
+	.boxContainer{
+		display: none;
+	}
+
+	nav.fixed-top{
+		display: none;
+	}
+	#img-btn{
+		position: absolute;
+  		top:4%;
+  		left: 10%;
+  		transform: translate(-50%, -50%);
+  -		ms-transform: translate(-50%, -50%);
+  		background-color: #24a0ed;
+  		color: white;
+  		font-size: 16px;
+  		padding: 12px 24px;
+  		border: none;
+  		cursor: pointer;
+  		border-radius: 5px;
+		position: fixed;
+		opacity: 30%;
+	}
+
+	#img-btn:hover{
+		opacity: 100%;
+	}
+</style>
+
+<!--Desktop View-->
+<section class="section-content padding-y bg desktop-view">
+	<div class="container">
+	
+	<!-- ============================ COMPONENT 1 ================================= -->
+	<div class="card">
+		<div class="row no-gutters">
+			<aside class="col-md-6">
+		<div class="img-big-wrap">
+		   <a href="#"><img src="{{single_product.images.url}}" style="height: fit-content;"></a>
+		</div> <!-- img-big-wrap.// -->
+	
+			</aside>
+			<main class="col-md-6 border-left">
+	<article class="content-body">
+	
+	<h2 class="title">{{single_product.product_name}}</h2>
+	
+	<div class="mb-3"> 
+		<var class="price h4">INR {{single_product.price}}</var> 
+	</div> 
+	
+	<p>{{ single_product.description }}</p>
+	
+	
+	<hr>
+		<div class="row">
+			<div class="item-option-select">
+				<h6>Choose Color</h6>
+				<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+				  <label class="btn btn-light">
+					<input type="radio" name="radio_color"> Silver
+				  </label>
+				  <label class="btn btn-light">
+					<input type="radio" name="radio_color"> Gray
+				  </label>
+				  <label class="btn btn-light active">
+					<input type="radio" name="radio_color checked"> Gold
+				  </label>
+				  <label class="btn btn-light">
+					<input type="radio" name="radio_color"> Black
+				  </label>
+				</div> 
+			</div>
+		</div> <!-- row.// -->
+		<div class="row">
+			<div class="item-option-select">
+				<h6>Select Size</h6>
+				<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+				  <label class="btn btn-light">
+					<input type="radio" name="radio_color"> S
+				  </label>
+				  <label class="btn btn-light active">
+					<input type="radio" name="radio_color" checked=""> M
+				  </label>
+				  <label class="btn btn-light">
+					<input type="radio" name="radio_color"> L
+				  </label>
+				  <label class="btn btn-light">
+					<input type="radio" name="radio_color"> XL
+				  </label>
+				</div> 
+			</div>
+		</div> <!-- row.// -->
+		<hr>
+		{% if single_product.stock <= 0 %}
+		<h5 class="text-danger">Out of Stock</h5>
+		{% else %}
+		<a href="{% url 'add_cart' single_product.id %}" class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+		{% endif %}
+	</article> <!-- product-info-aside .// -->
+			</main> <!-- col.// -->
+		</div> <!-- row.// -->
+	</div> <!-- card.// -->
+	<!-- ============================ COMPONENT 1 END .// ================================= -->
+	
+	<br>
+	
+	<div class="row">
+				<div class="col-md-9">
+	
+		<header class="section-heading">
+			<h3>Customer Reviews </h3>  
+			
+		</header>
+	
+		<article class="box mb-3">
+			<div class="icontext w-100">
+				<img src="./images/avatars/avatar1.jpg" class="img-xs icon rounded-circle">
+				<div class="text">
+					<span class="date text-muted float-md-right">24.04.2020 </span>  
+					<h6 class="mb-1">Mike John </h6>
+					
+				</div>
+			</div> <!-- icontext.// -->
+			<div class="mt-3">
+				<p>
+					Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip
+				</p>	
+			</div>
+		</article>
+
+		<article class="box mb-3">
+			<div class="icontext w-100">
+				<img src="./images/avatars/avatar1.jpg" class="img-xs icon rounded-circle">
+				<div class="text">
+					<span class="date text-muted float-md-right">24.04.2020 </span>  
+					<h6 class="mb-1">Mike John </h6>
+					
+				</div>
+			</div> <!-- icontext.// -->
+			<div class="mt-3">
+				<p>
+					Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip
+				</p>	
+			</div>
+		</article>
+		
+	
+		</div> <!-- col.// -->
+	</div> <!-- row.// -->
+	
+	
+	</div> <!-- container .//  -->
+	</section>
+
+<!--Mobile-View-->
+<main class="app-content mobile-appear">
+	<button value="Previous Page" onClick="javascript:history.go(-1);" id="img-btn"><i class="fas fa-arrow-circle-left"></i></button>
+	<section class="gallery-wrap">
+		<a href="{{single_product.images.url}}" data-fancybox="gallery" class="img-big-wrap"><img src="{{single_product.images.url}}" style="height: 100%; width: auto;"></a>
+	</section>
+
+	<section class="padding-around">
+
+
+		<p class="title-detail">{{single_product.product_name}}</p>
+		<div class="price-wrap mb-3">
+			<span class="h5 price">INR {{single_product.price}}</span>
+		</div> <!-- price-wrap.// -->
+		<hr>
+		<div class="rating-wrap mb-3">
+			<ul class="rating-stars">
+				<li style="width:80%" class="stars-active">
+					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+				</li>
+				<li>
+					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+					<i class="fa fa-star"></i> <i class="fa fa-star"></i>
+					<i class="fa fa-star"></i>
+				</li>
+			</ul>
+			<span class="label-rating text-muted">7/10</span>
+			<span class="label-rating text-muted">• 34 sold</span>
+		</div> <!-- rating-wrap.// -->
+
+
+		<dl class="dlist-align">
+			<dt class="text-muted">Condition</dt>
+			<dd><a href="#">Brand new</a></dd>
+		</dl>
+		<dl class="dlist-align">
+			<dt class="text-muted">Color</dt>
+			<dd>Orange</dd>
+		</dl>
+		<dl class="dlist-align">
+			<dt class="text-muted">Size</dt>
+			<dd>120sm x 300sm</dd>
+		</dl>
+		<dl class="dlist-align">
+			<dt class="text-muted">Material</dt>
+			<dd>Cotton</dd>
+		</dl>
+
+		<article class="mt-3">
+			<p>
+				{{ single_product.description }} <br> <a href="#" class="btn-link"> + Read more </a>
+			</p>
+		</article>
+
+
+	</section>
+
+	<hr class="divider my-3">
+
+	<h5 class="title-section padding-x">Reviews (3)</h5>
+	<section class="padding-x">
+
+		<article>
+			<div class="icontext mb-2">
+				<span class="icon"> <img src="images/avatars/1.jpg" class="icon-sm rounded-circle" alt="">
+				</span>
+				<div>
+					<p>Michael John <span class="text-muted">- Purchased</span></p>
+					<span class="text-warning">Good!</span>
+				</div>
+			</div>
+			<p class="text-muted">Good! Tello Edu drone is an ideal companion for anyone engaged Lorem ipsum
+				dolor sit amet
+				<a href="#">...Read more</a>
+			</p>
+		</article>
+		<hr>
+		<article>
+			<div class="icontext mb-2">
+				<span class="icon"> <img src="images/avatars/2.jpg" class="icon-sm rounded-circle" alt="">
+				</span>
+				<div>
+					<p>Alexandra K. <span class="text-muted">- Purchased</span></p>
+					<span class="text-warning">Best!</span>
+				</div>
+			</div>
+			<p class="text-muted">I liked this Tello Edu drone is an ideal companion for anyone engaged Lorem
+				ipsum dolor sit amet
+				<a href="#">...Read more</a>
+			</p>
+		</article>
+	</section>
+	<div style="margin-top: 30px;">
+	</div>
+
+	<!--Add to cart button-->
+	{% if single_product.stock <= 0 %}
+		<nav class="bar-bottom" style="border-top: 2px solid rgb(28, 28, 240);">
+			<h5 style="color: red;">Out of Stock</h5>
+		  </nav>
+	{% else %}
+	<nav class="bar-bottom" style="border-top: 2px solid rgb(28, 28, 240);">
+		<div>
+		  <div class="input-group input-spinner">
+			<div class="input-group-prepend">
+			  <button class="btn btn-light" type="button"> <i class="fa fa-minus"></i> </button>
+			</div>
+			<input type="text" class="form-control" value="1">
+			<div class="input-group-append">
+			  <button class="btn btn-light" type="button"> <i class="fa fa-plus"></i> </button>
+			</div>
+		  </div>
+		</div>
+		  <div class="flex-grow-1"><a href="{% url 'add_cart' single_product.id %}" class="btn  w-100 btn-primary" style="padding-left:2px;padding-right: 2px;">Add to cart</a></div>
+	  </nav>
+	{% endif %}
+
+</main>
+
+{% endblock %}

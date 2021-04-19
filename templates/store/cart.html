@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    footer{
+        display: none;
+    }
+    .fa-shopping-cart{
+        color: #f2163b;
+    }
+    .cart-text{
+        color: #f2163b;
+    }
+    .remove-btn:hover{
+        background-color: red;
+        color: white;
+    }
+</style>
+
+<section class="section-content padding-y bg desktop-view">
+    <div class="container">
+    
+    <!-- ============================ COMPONENT 1 ================================= -->
+    
+    <div class="row">
+        <aside class="col-lg-9">
+    <div class="card">
+    <table class="table table-borderless table-shopping-cart">
+    <thead class="text-muted">
+    <tr class="small text-uppercase">
+      <th scope="col">Product</th>
+      <th scope="col" width="120">Quantity</th>
+      <th scope="col" width="120">Price</th>
+      <th scope="col" class="text-right" width="200"> </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for cart_item in cart_items %}
+    <tr>
+        <td>
+            <figure class="itemside align-items-center">
+                <div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
+                <figcaption class="info">
+                    <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                    <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
+                </figcaption>
+            </figure>
+        </td>
+        <td> 
+            <!-- col.// -->
+                        <div class="col"> 
+                            <div class="input-group input-spinner">
+                                <div class="input-group-prepend">
+                                <a href="{%url 'remove_cart' cart_item.product.id%}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i></a>
+                                </div>
+                                <input type="text" class="form-control"  value="{{ cart_item.quantity }}">
+                                <div class="input-group-append">
+                                <a href="{%url 'add_cart' cart_item.product.id%}" class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
+                                </div>
+                            </div> <!-- input-group.// -->
+                        </div> <!-- col.// -->
+        </td>
+        <td> 
+            <div class="price-wrap"> 
+                <var class="price">INR {{ cart_item.sub_total }}</var> 
+                <small class="text-muted"> INR {{ cart_item.product.price }} each </small> 
+            </div> <!-- price-wrap .// -->
+        </td>
+        <td class="text-right"> 
+        <a href="{%url 'remove_cart_item' cart_item.product.id%}" class="btn btn-danger"> Remove</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    </div> <!-- card.// -->
+    
+        </aside> <!-- col.// -->
+        <aside class="col-lg-3">
+    
+            <div class="card">
+            <div class="card-body">
+                <dl class="dlist-align">
+                  <dt>Total price:</dt>
+                  <dd class="text-right">INR {{total}}</dd>
+                </dl>
+                <dl class="dlist-align">
+                  <dt>Tax:</dt>
+                  <dd class="text-right">INR {{tax}}</dd>
+                </dl>
+                <dl class="dlist-align">
+                  <dt>Total:</dt>
+                  <dd class="text-right text-dark b"><strong>INR {{grand_total}}</strong></dd>
+                </dl>
+                <hr>
+                <p class="text-center mb-3">
+                    <img src="{% static './images/misc/payments.png'%}" height="26">
+                </p>
+                <a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
+                <a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
+            </div> <!-- card-body.// -->
+            </div> <!-- card.// -->
+    
+    </aside> <!-- col.// -->
+    
+    
+    </div> <!-- row.// -->
+    <!-- ============================ COMPONENT 1 END .// ================================= -->
+    
+    </div> <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+    <!--Mobile-view-->
+    <div class="mobile-appear" style="margin-top: 50px;">
+        <main class="app-content">
+			<section class="section-products padding-around">
+                {% for cart_item in cart_items %}
+				<figure class="itemside item-cart">
+					<div class="aside"><img src="{{ cart_item.product.images.url }}" class="rounded img-md"></div>
+					<figcaption class="info align-self-center">
+						<a href="#" class="title">{{ cart_item.product.product_name }}</a>
+                        <div > 
+                            <div class="input-group input-spinner" style="max-width: fit-content;">
+                                <div class="input-group-prepend" style="max-width: 20px;height: auto;">
+                                <a href="{%url 'remove_cart' cart_item.product.id%}" class="btn btn-light" type="button" id="button-plus" style="font-size: 10px;"> <i class="fa fa-minus"></i></a>
+                                </div>
+                                <input type="text" class="form-control"  value="{{ cart_item.quantity }}" style="max-width: 20px;height: auto;padding-right: 0px;font-size: 10px;">
+                                <div class="input-group-append" style="max-width: 20px;height: auto;padding-left:0px;">
+                                <a href="{%url 'add_cart' cart_item.product.id%}" class="btn btn-light" type="button" id="button-minus" style="font-size: 10px;"> <i class="fa fa-plus"></i> </a>
+                                </div>
+                            </div> <!-- input-group.// -->
+                        </div> <!-- col.// -->
+						<span class="price"><var class="price">INR {{ cart_item.sub_total }}</var> <br>
+                            <small class="text-muted"> INR {{ cart_item.product.price }} each </small> </span>
+						<div class="form-inline mt-2">
+							<a href="{%url 'remove_cart_item' cart_item.product.id%}" class="mr-2 btn-sm btn btn-danger remove-btn"> <i class="fa fa-trash"></i> Remove </a>
+						</div>
+					</figcaption>
+				</figure>
+                {% endfor %}
+                <div class="card-body col-10">
+                    <dl class="dlist-align">
+                      <dt>Total price:</dt>
+                      <dd class="text-right">₹{{total}}</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                      <dt>Tax:</dt>
+                      <dd class="text-right">₹{{tax}}</dd>
+                    </dl>
+                    <dl class="dlist-align">
+                      <dt>Total:</dt>
+                      <dd class="text-right text-dark b"><strong>₹{{grand_total}}</strong></dd>
+                    </dl>
+                    <hr>
+                    <p class="text-center mb-3">
+                        <img src="{% static './images/misc/payments.png'%}" height="26">
+                    </p>
+                    <a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
+                    <a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
+                </div> <!-- card-body.// -->
+
+			</section> <!-- section-products  .// -->
+
+			<hr class="divider">
+
+		</main>
+    </div>
+{% endblock %}
