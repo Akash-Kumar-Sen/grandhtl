@@ -22,7 +22,13 @@
     <div class="container">
     
     <!-- ============================ COMPONENT 1 ================================= -->
-    
+    {% if not cart_items %}
+        <h2 class="text-center">Your Shopping Cart is Empty</h2>
+        <br>
+        <div class="text-center">
+            <a href="{% url 'store' %}" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    {% else %}
     <div class="row">
         <aside class="col-lg-9">
     <div class="card">
@@ -107,7 +113,7 @@
     
     </div> <!-- row.// -->
     <!-- ============================ COMPONENT 1 END .// ================================= -->
-    
+    {% endif %}
     </div> <!-- container .//  -->
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
@@ -117,6 +123,8 @@
     <div class="mobile-appear" style="margin-top: 50px;">
         <main class="app-content">
 			<section class="section-products padding-around">
+                {% if not cart_items %}
+                {% else %}
                 {% for cart_item in cart_items %}
 				<figure class="itemside item-cart">
 					<div class="aside"><img src="{{ cart_item.product.images.url }}" class="rounded img-md"></div>
@@ -141,6 +149,7 @@
 					</figcaption>
 				</figure>
                 {% endfor %}
+                {% endif %}
                 <div class="card-body col-10">
                     <dl class="dlist-align">
                       <dt>Total price:</dt>
