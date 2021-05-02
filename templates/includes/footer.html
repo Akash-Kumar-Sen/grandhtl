@@ -33,7 +33,7 @@
             <div class="footer-col">
                 <h4>company</h4>
                 <ul>
-                    <li><a href="#">about us</a></li>
+                    <li><a href="{% url 'aboutus' %}">about us</a></li>
                     <li><a href="#">our services</a></li>
                     <li><a href="#">privacy policy</a></li>
                     <li><a href="#">affiliate program</a></li>
@@ -73,30 +73,37 @@
 <!--
 -->
 <div class="mx-0" id="base-navbar" style="margin-bottom: 0px;border-radius: 20px 20px 0px 0px;">
-    <div class="row text-center" >
+    <div class="row text-center">
         <div class="col-3">
             <a href="{% url 'home' %}" class="no-href-style">
-            <i class="fa fa-home" style="font-size:20px;padding-bottom:0px;"></i>
-            <div class="home-text" style="font-size:12px;">Home</div>
+            <i class="fa fa-home" style="font-size:20px;padding-bottom:0px;color: #d9534f;"></i>
+            <div class="home-text" style="font-size:12px;color: #d9534f;">Home</div>
             </a>
         </div>
         <div class="col-3">
             <a href="{% url 'store' %}" class="no-href-style">
-            <i class="fa fa-shopping-bag" style="font-size:20px;padding-bottom:0px;"></i>
-            <div class="store-text" style="font-size:12px;">Store</div>
+            <i class="fa fa-shopping-bag" style="font-size:20px;padding-bottom:0px;color: #d9534f;"></i>
+            <div class="store-text" style="font-size:12px;color: #d9534f;">Store</div>
         </a>
         </div>
         <div class="col-3">
             <a href="{% url 'cart' %}" class="no-href-style">
-            <i class="fa fa-shopping-cart" style="font-size:20px;padding-bottom:0px;"></i>
-            <div class="cart-text" style="font-size:12px;">Cart</div>
+            <i class="fa fa-shopping-cart" style="font-size:20px;padding-bottom:0px;color: #d9534f;"></i>
+            <div class="cart-text" style="font-size:12px;color: #d9534f;">Cart</div>
         </a>
         </div>
         <div class="col-3">
-            <a href="#" class="no-href-style">
-            <i class="fa fa-user" style="font-size:20px;padding-bottom:0px;"></i>
-            <div style="font-size:12px;">User</div>
+            {% if user.id is not None %}
+            <a href="{% url 'dashboard' %}" class="no-href-style">
+            <i class="fa fa-user" style="font-size:20px;padding-bottom:0px;color: #d9534f;"></i>
+            <div style="font-size:12px;color: #d9534f;">Profile </div>
             </a>
+            {% else %}
+            <a href="{% url 'login' %}" class="no-href-style">
+                <i class="fas fa-sign-in-alt" style="font-size:20px;padding-bottom:0px;color: #d9534f;"></i>
+                <div style="font-size:12px;color: #d9534f;">Sign in</div>
+            </a>
+            {% endif %}
         </div>
     </div>
 </div>

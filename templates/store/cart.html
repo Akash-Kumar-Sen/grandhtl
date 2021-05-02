@@ -16,6 +16,9 @@
         background-color: red;
         color: white;
     }
+    .search{
+        display: none;
+    }
 </style>
 
 <section class="section-content padding-y bg desktop-view">
@@ -103,8 +106,8 @@
                 <p class="text-center mb-3">
                     <img src="{% static './images/misc/payments.png'%}" height="26">
                 </p>
-                <a href="./place-order.html" class="btn btn-primary btn-block"> Checkout </a>
-                <a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>
+                <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
+                <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
             </div> <!-- card-body.// -->
             </div> <!-- card.// -->
     
@@ -120,61 +123,61 @@
 
 
     <!--Mobile-view-->
-    <div class="mobile-appear" style="margin-top: 50px;">
-        <main class="app-content">
-			<section class="section-products padding-around">
-                {% if not cart_items %}
-                {% else %}
-                {% for cart_item in cart_items %}
-				<figure class="itemside item-cart">
-					<div class="aside"><img src="{{ cart_item.product.images.url }}" class="rounded img-md"></div>
-					<figcaption class="info align-self-center">
-						<a href="#" class="title">{{ cart_item.product.product_name }}</a>
-                        <div > 
-                            <div class="input-group input-spinner" style="max-width: fit-content;">
-                                <div class="input-group-prepend" style="max-width: 20px;height: auto;">
-                                <a href="{%url 'remove_cart' cart_item.product.id%}" class="btn btn-light" type="button" id="button-plus" style="font-size: 10px;"> <i class="fa fa-minus"></i></a>
-                                </div>
-                                <input type="text" class="form-control"  value="{{ cart_item.quantity }}" style="max-width: 20px;height: auto;padding-right: 0px;font-size: 10px;">
-                                <div class="input-group-append" style="max-width: 20px;height: auto;padding-left:0px;">
-                                <a href="{%url 'add_cart' cart_item.product.id%}" class="btn btn-light" type="button" id="button-minus" style="font-size: 10px;"> <i class="fa fa-plus"></i> </a>
-                                </div>
-                            </div> <!-- input-group.// -->
-                        </div> <!-- col.// -->
-						<span class="price"><var class="price">INR {{ cart_item.sub_total }}</var> <br>
-                            <small class="text-muted"> INR {{ cart_item.product.price }} each </small> </span>
-						<div class="form-inline mt-2">
-							<a href="{%url 'remove_cart_item' cart_item.product.id%}" class="mr-2 btn-sm btn btn-danger remove-btn"> <i class="fa fa-trash"></i> Remove </a>
-						</div>
-					</figcaption>
-				</figure>
-                {% endfor %}
-                {% endif %}
-                <div class="card-body col-10">
-                    <dl class="dlist-align">
-                      <dt>Total price:</dt>
-                      <dd class="text-right">₹{{total}}</dd>
-                    </dl>
-                    <dl class="dlist-align">
-                      <dt>Tax:</dt>
-                      <dd class="text-right">₹{{tax}}</dd>
-                    </dl>
-                    <dl class="dlist-align">
-                      <dt>Total:</dt>
-                      <dd class="text-right text-dark b"><strong>₹{{grand_total}}</strong></dd>
-                    </dl>
-                    <hr>
-                    <p class="text-center mb-3">
-                        <img src="{% static './images/misc/payments.png'%}" height="26">
-                    </p>
-                    <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
-                    <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
-                </div> <!-- card-body.// -->
+    
 
-			</section> <!-- section-products  .// -->
+    <section class="section-products padding-around mobile-appear">
 
-			<hr class="divider">
 
-		</main>
-    </div>
+        {% if not cart_items %}
+        {% else %}
+            {% for cart_item in cart_items %}
+                <article class="item-cart">
+                    <figure class="itemside mb-3">
+                        <div class="aside"><img src="{{ cart_item.product.images.url }}" class="rounded img-md"></div>
+                        <figcaption class="info">
+                            <a href="#" class="title text-truncate">{{ cart_item.product.product_name }}</a>
+                            <div class="price-wrap mb-3">
+                                <small class="text-muted"> ₹ {{ cart_item.product.price }} each</small><br>
+                                <strong class="price">₹ {{ cart_item.sub_total }}</strong>
+                            </div>
+                        </figcaption>
+                    </figure>
+                
+                    <a href="{%url 'remove_cart_item' cart_item.product.id%}" class="btn btn-icon btn-outline-danger"> <i class="fa fa-times"></i></a>
+                    <div class="input-group input-spinner float-right">
+                        <div class="input-group-prepend">
+                            <a href="{%url 'remove_cart' cart_item.product.id%}"><button class="btn btn-light" type="button"> <i class="fa fa-minus"></i> </button></a>
+                            
+                        </div>
+                        <input type="number" class="form-control" value="{{ cart_item.quantity }}">
+                        <div class="input-group-append">
+                            <a href="{%url 'add_cart' cart_item.product.id%}"><button class="btn btn-light" type="button"> <i class="fa fa-plus"></i> </button></a>
+                        </div>
+                    </div>
+                </article> <!-- item-cart.// -->
+            {% endfor %}
+        {% endif %}
+        <div class="card">
+            <div class="card-body">
+                <dl class="dlist-align">
+                  <dt>Total price:</dt>
+                  <dd class="text-right">INR {{total}}</dd>
+                </dl>
+                <dl class="dlist-align">
+                  <dt>Tax:</dt>
+                  <dd class="text-right">INR {{tax}}</dd>
+                </dl>
+                <dl class="dlist-align">
+                  <dt>Total:</dt>
+                  <dd class="text-right text-dark b"><strong>INR {{grand_total}}</strong></dd>
+                </dl>
+                <hr>
+                <p class="text-center mb-3">
+                    <img src="{% static './images/misc/payments.png'%}" height="26">
+                </p>
+                <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
+                <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+            </div> <!-- card-body.// -->
+        </div> <!-- card.// -->
+        </section>
 {% endblock %}

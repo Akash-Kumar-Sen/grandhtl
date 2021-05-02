@@ -93,14 +93,14 @@ img.logo-mobile {
 .menu-wrapper {
 	position: fixed;
 	top: 0;
-	left: 0;
+	right: 0;
 	z-index: 1;
 }
 
 .menu-wrapper .toggler {
 	position: absolute;
 	top: 0;
-	left: 0;
+	right: 0;
 	z-index: 2;
 	cursor: pointer;
 	width: 50px;
@@ -188,7 +188,7 @@ img.logo-mobile {
 .menu-wrapper .menu {
 	position: fixed;
 	top: 0;
-	left: 0;
+	right: 0;
 	width: 100%;
 	height: 100%;
 	visibility: hidden;

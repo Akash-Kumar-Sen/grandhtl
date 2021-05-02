@@ -4,12 +4,12 @@
 <div class="row align-items-center">
 	<div class="col-lg-2 col-md-3 col-6">
 		<a href="{% url 'home' %}" class="brand-wrap">
-			<img class="logo" src="{%static 'images/logo.png'%}">
+			<img class="logo" src="{%static 'images/logo.png'%}" style="transform: scale(1.5);">
 		</a> <!-- brand-wrap.// -->
 	</div>
 	<div class="col-lg col-sm col-md col-6 flex-grow-0">
 		<div class="category-wrap dropdown d-inline-block float-right">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
+			<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"> 
 				<i class="fa fa-bars"></i> All category 
 			</button>
 			<div class="dropdown-menu">
@@ -19,7 +19,7 @@
 			</div>
 		</div>  <!-- category-wrap.// -->
 	</div> <!-- col.// -->
-	<a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
+	<a href="{% url 'store' %}" class="btn btn-outline-danger">Store</a>
 	<div class="col-lg  col-md-6 col-sm-12 col">
 		<!-- search-wrap/ -->
 		<form action="{% url 'search' %}" class="search" method='GET'>
@@ -27,7 +27,7 @@
 				<input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword" required>
 	  
 				<div class="input-group-append">
-				  <button class="btn btn-primary" type="submit">
+				  <button class="btn btn-danger" type="submit">
 					<i class="fa fa-search"></i>
 				  </button>
 				</div>
@@ -64,36 +64,53 @@
 </section>
 
 <!--Appear in mobile view-->
-<!--Header-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top mobile-appear" style="border-radius: 0px 0px 20px 20px;">
-    <div class="nav-item menu-wrapper">
-        <input type="checkbox" class="toggler">
-        <div class="hamburger"><div></div></div>
-        <div class="menu">
-          <div>
-            <div>
-              <ul>
-                <li class="Link-items"><a href="#">Login/Register</a></li>
-                <li class="Link-items"><a href="#">About</a></li>
-                <li class="Link-items"><a href="#">Services</a></li>
-                <li class="Link-items"><a href="#">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    <a class="navbar-brand brand-wrap" href="{% url 'home' %}"><img class="logo-mobile" src="{%static 'images/logo.png'%}"></a>
-    <div class="boxContainer pull-right">
-        <table class="elementsContainer">
-			<form action="{% url 'search' %}" class="search" method='GET'>
-            <td>
-                <input type="text" placeholder="search" class="search bg-light" name="keyword" required>
-				
-            </td>
-            <td>
-                <button class="bg-light" href="" type="submit" style="border:none; margin:0px;border-radius: 50%;"><i class="fa fa-search"></i></button>
-            </td>
-			</form>
-        </table>
-    </div>
-  </nav>
+<div class="mobile-appear dashboard-dissapear">
+	<header class="app-header bg-light" style="height: 40px;margin:auto;">
+		<a class="navbar-brand" href="{% url 'home' %}" style="transform: scale(2);">
+			<img src="{%static 'images/logo.png'%}" class="logo-mobile">
+		</a>
+		<div class="" style="position:absolute;right:0;">
+			<button class="btn btn-header" type="button" data-trigger="#sidebar_left" style="border: 2px solid rgb(236, 44, 19); padding: 1px;" ><i class="fa fa-bars" style="color: rgb(209, 14, 14);"></i></button>
+		</div>
+		<aside class="offcanvas" id="sidebar_left">
+			<div class="card-body bg-danger">
+				<button class="btn-close close text-white">&times;</button>
+				{% if user.id is not None %}
+				<h6 class="text-white mt-3 mb-0">Welcome {{ user.first_name }}!</h6>
+				{% else %}
+				<h6 class="text-white mt-3 mb-0">Welcome Guest!</h6>
+				{% endif %}
+			</div>
+			<nav class="nav-sidebar"><i class=""></i>
+				<a href="{% url 'home' %}"> <i class="fa fa-home"></i> Home</a>
+				<a href="{% url 'store' %}"> <i class="fas fa-shopping-bag"></i>Shop</a>
+				<a href="{% url 'aboutus' %}">  <i class="fa fa-info-circle"></i> About us</a>
+				<a href="index.html">  <i class="fa fa-building"></i> Company</a>
+				{% if user.id is not None %}
+				<a href="{% url 'logout' %}">  <i class="fas fa-sign-out-alt"></i> Logout </a>
+				{% else %}
+				<a href="{% url 'login' %}">  <i class="fas fa-sign-in-alt"></i> Login </a>
+				{% endif %}
+			</nav>
+			<hr>
+			<nav class="nav-sidebar">
+				<a href="#"> <i class="fa fa-phone"></i> +99812345678</a>
+				<a href="#"> <i class="fa fa-envelope"></i> info@somename.uz</a>
+				<a href="#"> <i class="fa fa-map-marker"></i> Tashkent city</a>
+			</nav>
+		</aside>
+	</header> <!-- section-header.// -->
+	<div class="bg-light" style="align-items: center;margin:auto;padding-bottom: 5px;">
+		<form action="{% url 'search' %}" class="search" method='GET'>
+			<div class="input-group w-100">
+				<input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword" required>
+	
+				<div class="input-group-append">
+				<button class="btn btn-danger" type="submit">
+					<i class="fa fa-search"></i>
+				</button>
+				</div>
+			</div>
+		</form> <!-- search-wrap .end// -->
+	</div>
+</div>

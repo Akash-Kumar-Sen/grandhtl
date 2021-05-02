@@ -216,23 +216,18 @@
         <main class="app-content">
         {% if products %}
             {% if 'search' in request.path %}
-            <div style="margin-top:-7px;">
+            <div style="margin-top:-50px;">
                 <h5 class="title-page" style="margin-left: 0.8rem;">Search Results</h5>
             </div>
-            {% endif %}
-	    {% elif not products %}
-        <div>
-            <h5 style="margin-left: 0.8rem;">No Products Found!</h5>
-        </div>
-        {% else %}
-            <form action="" class="padding-around">
+            {% else %}
+            <form action="" class="padding-around" style="padding-top: 0px;margin-top: -40px;">
                 <div class="row">
                     <div class="col-6">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border:1px solid rgb(0, 0, 0);">
                           Categories
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="border:thck ;">
                             <ul class="dropdown-item"><a href="{% url 'store' %}">All Items</a></ul>
                             {% for category in links %}
                             <ul class="dropdown-item"><a href="{{category.get_url}}">{{category.category_name}}</a></ul>
@@ -249,6 +244,11 @@
                     </div> <!-- col.// -->
                 </div> <!-- row.// -->
             </form>
+            {% endif %}
+	    {% else %}
+        <div>
+            <h5 style="margin-left: 0.8rem;">No Products Found!</h5>
+        </div>
 	    {% endif %}
         <section class="padding-x">
         <div class="row">

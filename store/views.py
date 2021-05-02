@@ -36,10 +36,12 @@ def store(request,category_slug=None):
     return render(request,'store/store.html',context)
 
 def product_detail(request,category_slug,product_slug):
-
+    user=request.user
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
         in_cart = CartItem.objects.filter(cart__cart_id=__cart_id(request), product=single_product).exists()
+        if user.is_authenticated:
+            in_cart=(in_cart or CartItem.objects.filter(user=user, product=single_product).exists())
     except Exception as e:
         raise e
 

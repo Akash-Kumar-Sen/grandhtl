@@ -13,42 +13,63 @@
 	}
 </style>
 <!-- ========================= SECTION MAIN Desktop========================= -->
-<section class="section-intro padding-y-sm">
+<section class="section-intro">
 <!-- ============================ COMPONENT BANNER Desktop================================= -->
-<div class="card-banner overlay-gradient desktop-banner container" style="min-height:500px;border-radius: 0px;background-image: url('{%static 'images/banners/cover.jpg' %}');">
-	<div class="card-img-overlay white">
-	  <h3 class="card-title">Some text here</h3>
-	  <p class="card-text" style="max-width: 400px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	  tempor incididunt.</p>
-	  <a href="" class="btn btn-warning">Learn more</a>
-	</div>
+<div class="desktop-banner container" style="min-height:500px;border-radius: 0px;margin-top: 20px;">
+	<a href="{% url 'store' %}">
+	<img class="mySlides" src="{%static 'images/banners/slide4.jpg' %}" style="width:100%;height: 500px;">
+	<img class="mySlides" src="{%static 'images/banners/slide1.jpg' %}" style="width:100%;height: 500px;">
+	<img class="mySlides" src="{%static 'images/banners/slide2.jpg' %}" style="width:100%;height: 500px;">
+	<img class="mySlides" src="{%static 'images/banners/slide3.jpg' %}" style="width:100%;height: 500px;">
+	</a>
+	<button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)" style="margin-left: 180px;">&#10094;</button>
+  	<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)"style="margin-right: 180px;">&#10095;</button>
   </div>
   <!-- ============================ COMPONENT BANNER 7  END .// =========================== -->
+  <script>
+	  	var slideIndex = 1;
+		showDivs(slideIndex);
+
+		function plusDivs(n) {
+		showDivs(slideIndex += n);
+		}
+
+		function showDivs(n) {
+		var i;
+		var x = document.getElementsByClassName("mySlides");
+		if (n > x.length) {slideIndex = 1}
+		if (n < 1) {slideIndex = x.length} ;
+		for (i = 0; i < x.length; i++) {
+			x[i].style.display = "none";
+		}
+		x[slideIndex-1].style.display = "block";
+		}
+
+  </script>
 </section><!--Destop Section main end-->
 
 
 
 <!-- ========================= SECTION MAIN Mobile// ========================= -->
-<section class="mb-2 scroll-horizontal mobile-banner" style="margin-top: 5px;">
-    <a href="#" class="item-slider card-banner">
-        <div class="card-body bg-warning" style="height:220px; background-image: url('{%static 'images/banners/slide1.jpg' %}');"> </div>
-        <div class="text-bottom"><h5 class="title">Super discount</h5></div>
+<section class="mb-2 scroll-horizontal mobile-banner" style="margin-top: 0px;padding-top: 0px;">
+	<a href="{% url 'store' %}" class="item-slider card-banner">
+        <div class="card-body bg-warning" style="width:100%;height:160px; background-image: url('{%static 'images/banners/slide4.jpg' %}');"> </div>
     </a>
-    <a href="#" class="item-slider card-banner">
-        <div class="card-body bg-warning" style="height:220px; background-image: url('{%static 'images/banners/slide2.jpg' %}');"> </div>
-        <div class="text-bottom"><h5 class="title">Get offers</h5></div>
+    <a href="{% url 'store' %}" class="item-slider card-banner">
+        <div class="card-body bg-warning" style="width:100%;height:160px; background-image: url('{%static 'images/banners/slide1.jpg' %}');"> </div>
     </a>
-    <a href="#" class="item-slider card-banner">
-        <div class="card-body bg-warning" style="height:220px; background-image: url('{%static 'images/banners/slide3.jpg' %}');"> </div>
-        <div class="text-bottom"><h5 class="title">Best deals now</h5></div>
+    <a href="{% url 'store' %}" class="item-slider card-banner">
+        <div class="card-body bg-warning" style="width:100%;height:160px; background-image: url('{%static 'images/banners/slide2.jpg' %}');"> </div>
+    </a>
+    <a href="{% url 'store' %}" class="item-slider card-banner">
+        <div class="card-body bg-warning" style="width:100%;height:160px; background-image: url('{%static 'images/banners/slide3.jpg' %}');"> </div>
     </a>
 </section><!--Mobole Section Main end-->
 
 
 <!--Rounder category list for mobile view-->
 <!-- ========================= SECTION  1========================= -->
-<section class="section-name padding-y-sm round-category">
-	<div class="container">
+	<div class="container round-category">
 		<header class="section-heading">
 			<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
 			<h4 class="section-title">Categories</h4>
@@ -65,14 +86,13 @@
 			{% endfor %}
 		</div><!--Row end-->
 	</div>
-</section>
 <!--Round category ends-->
 
 <!--Latest products-->
 <div class="mobile-appear">
 	<h4 class="title-section">New arrival</h4>
 	<section class="scroll-horizontal  padding-x">
-		{% for product in products %}
+		{% for product in new_arrivals %}
 		<div class="item">
 			<a href="{{product.get_url}}" class="product-sm">
 				<div class="img-wrap"> <img src="{{ product.images.url }}"> </div>
@@ -90,7 +110,7 @@
 <div class="mobile-appear">
 	<h4 class="title-section">Recommended</h4>
 	<section class="scroll-horizontal  padding-x">
-		{% for product in products %}
+		{% for product in recomended_products %}
 		<div class="item">
 			<a href="{{product.get_url}}" class="product-sm">
 				<div class="img-wrap"> <img src="{{ product.images.url }}"> </div>
@@ -160,11 +180,11 @@
 
 <header class="section-heading">
 	<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
-	<h3 class="section-title">Popular products</h3>
+	<h3 class="section-title">Recommended products</h3>
 </header><!-- sect-heading -->
 
 <div class="row">
-	{% for product in products %}
+	{% for product in recomended_products %}
 	<div class="col-md-3">
 		<div class="card card-product-grid">
 			<a href="{{product.get_url}}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
@@ -180,6 +200,33 @@
 </div><!-- container // -->
 </section>
 <!-- ========================= SECTION  END// ========================= -->
+
+<!-- ========================= SECTION  3========================= -->
+<section class="section-name padding-y-sm desktop-view">
+	<div class="container">
+	
+	<header class="section-heading">
+		<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>
+		<h3 class="section-title">New Arrivals</h3>
+	</header><!-- sect-heading -->
+	
+	<div class="row">
+		{% for product in new_arrivals %}
+		<div class="col-md-3">
+			<div class="card card-product-grid">
+				<a href="{{product.get_url}}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+				<figcaption class="info-wrap">
+					<a href="{{product.get_url}}" class="title">{{product.product_name}}</a>
+					<div class="price mt-1">₹{{product.price}}</div> <!-- price-wrap.// -->
+				</figcaption>
+			</div>
+		</div> <!-- col.// -->
+		{% endfor %}
+	</div> <!-- row.// -->
+	
+	</div><!-- container // -->
+	</section>
+	<!-- ========================= SECTION  END// ========================= -->
 
 </body>
 </html>
