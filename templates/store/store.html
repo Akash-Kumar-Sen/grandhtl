@@ -252,7 +252,7 @@
 	    {% endif %}
         <section class="padding-x">
         <div class="row">
-            {% for product in all_products %}
+            {% for product in products %}
             <div class="col-6 col-sm-6 col-md-4">
                 <a href="#" class="product-sm mb-3">
                     <div class="img-wrap"> <a href="{{product.get_url}}"><img src="{{ product.images.url }}" style="max-width: 100%;height:auto;"></a></div>
@@ -266,6 +266,35 @@
         </div> <!-- row end -->
         
         </section> <!-- section body .// -->
+
+        {% if products.has_other_pages %}
+        <div class="card" style="align-items: center;">
+            <div class="mt-4" aria-label="Page navigation sample" style="margin-bottom: 30px;position: relative;">
+                <ul class="pagination">
+                    {% if products.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}">Previous</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    {% endif %}
+        
+                    {% for i in products.paginator.page_range %}
+                        {% if products.number == i %}
+                            <li class="page-item" style="overflow-y:scroll;"><a class="page-link" href="#">{{i}}</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+        
+                    {% if products.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}">Next</a></li>
+                    {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        
+        {% endif %}
         
         </main>
         </div>
