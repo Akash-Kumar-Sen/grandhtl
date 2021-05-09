@@ -50,25 +50,29 @@
 	<div class="row">
 		<div class="col-md-4">
 			<div class="card" id="mobimg">
-			  <img src="{%static 'images/banners/slide4.jpg' %}" class="card-img">
+				<img src="{%static 'images/banners/slide4.jpg' %}"  class="mySlides2">
+				<img src="{%static 'images/banners/slide1.jpg' %}"  class="mySlides2">
+				<img src="{%static 'images/banners/slide2.jpg' %}"  class="mySlides2">
+				<img src="{%static 'images/banners/slide3.jpg' %}"  class="mySlides2">
 			</div>
 		</div> <!-- col.// -->
 	</div>
 	<script>
-		var images2 = ["{%static 'images/banners/slide1.jpg' %}", "{%static 'images/banners/slide2.jpg' %}", "{%static 'images/banners/slide3.jpg' %}", "{%static 'images/banners/slide4.jpg' %}"];
-		var x2 = 0;
-		var imgs2 = document.getElementById('mobimg');
-		setInterval(slider, 2000);
-		function slider() {
-		  if (x2 < images2.length) {
-			x2 = x2 + 1;
-		  } else {
-			x2 = 1;
-		  }
-		  imgs2.innerHTML = "<img src=\"" + images2[x2 - 1] +"\""+ "class='card-img'>";
-	
+		var slideIndex2 = 0;
+		showSlides2();
+
+		function showSlides2() {
+		var i2;
+		var slides2 = document.getElementsByClassName("mySlides2");
+		for (i2 = 0; i2 < slides2.length; i2++) {
+			slides2[i2].style.display = "none";
 		}
-	  </script>
+		slideIndex2++;
+		if (slideIndex2 > slides2.length) {slideIndex2 = 1}
+		slides2[slideIndex2-1].style.display = "block";
+		setTimeout(showSlides2, 2000); // Change image every 2 seconds
+		}
+	</script>
 </section><!--Mobole Section Main end-->
 
 
