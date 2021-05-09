@@ -66,12 +66,13 @@
 <!--Appear in mobile view-->
 <div class="mobile-appear dashboard-dissapear">
 	<header class="app-header bg-light" style="height: 40px;margin:auto;">
-		<a class="navbar-brand" href="{% url 'home' %}" style="transform: scale(2);">
-			<img src="{%static 'images/logo.png'%}" class="logo-mobile">
-		</a>
-		<div class="" style="position:absolute;right:0;">
+		<div class="" style="position:absolute;left:0;margin-left: 5px;margin-right: 15px;">
 			<button class="btn btn-header" type="button" data-trigger="#sidebar_left" style="border: 2px solid rgb(236, 44, 19); padding: 1px;" ><i class="fa fa-bars" style="color: rgb(209, 14, 14);"></i></button>
 		</div>
+		<a class="navbar-brand" href="{% url 'home' %}" style="transform: scale(1.4); margin-left: 75px;">
+			<img src="{%static 'images/logo.png'%}" class="logo-mobile">
+		</a>
+		
 		<aside class="offcanvas" id="sidebar_left">
 			<div class="card-body bg-danger">
 				<button class="btn-close close text-white">&times;</button>
@@ -83,7 +84,7 @@
 			</div>
 			<nav class="nav-sidebar"><i class=""></i>
 				<a href="{% url 'home' %}"> <i class="fa fa-home"></i> Home</a>
-				<a href="{% url 'store' %}"> <i class="fas fa-shopping-bag"></i>Shop</a>
+				<a href="{% url 'store' %}"> <i class="fas fa-shopping-bag"></i> Shop</a>
 				<a href="{% url 'aboutus' %}">  <i class="fa fa-info-circle"></i> About us</a>
 				<a href="index.html">  <i class="fa fa-building"></i> Company</a>
 				{% if user.id is not None %}
@@ -100,7 +101,7 @@
 			</nav>
 		</aside>
 	</header> <!-- section-header.// -->
-	<div class="bg-light" style="align-items: center;margin:auto;padding-bottom: 5px;">
+	<div class="bg-light" style="align-items: center;margin:auto;padding-bottom: 5px;padding-top: 6px;">
 		<form action="{% url 'search' %}" class="search" method='GET'>
 			<div class="input-group w-100">
 				<input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword" required>
