@@ -12,34 +12,33 @@
 		color: #f2163b;
 	}
 </style>
-<!-- ========================= SECTION MAIN Desktop========================= -->
 <section class="section-intro">
-<!-- ============================ COMPONENT BANNER Desktop================================= -->
-<div class="desktop-banner container" style="min-height:500px;border-radius: 0px;margin-top: 20px;">
-	<a href="{% url 'store' %}">
-	<img src="{%static 'images/banners/slide4.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
-	<img src="{%static 'images/banners/slide1.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
-	<img src="{%static 'images/banners/slide2.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
-	<img src="{%static 'images/banners/slide3.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
-	</a>
+	<!-- ============================ COMPONENT BANNER Desktop================================= -->
+	<div class="desktop-banner container" style="min-height:500px;border-radius: 0px;margin-top: 20px;">
+		<a href="{% url 'store' %}">
+		<img src="{%static 'images/banners/slide4.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
+		<img src="{%static 'images/banners/slide1.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
+		<img src="{%static 'images/banners/slide2.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
+		<img src="{%static 'images/banners/slide3.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
+		</a>
 	</div>
-  <!-- ============================ COMPONENT BANNER 7  END .// =========================== -->
-  <script>
-	  	var slideIndex = 0;
-		showSlides();
-
-		function showSlides() {
-		var i;
-		var slides = document.getElementsByClassName("mySlides");
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.display = "none";
-		}
-		slideIndex++;
-		if (slideIndex > slides.length) {slideIndex = 1}
-		slides[slideIndex-1].style.display = "block";
-		setTimeout(showSlides, 2000); // Change image every 2 seconds
-		}
-  </script>
+	<!-- ============================ COMPONENT BANNER 7  END .// =========================== -->
+	  <script>
+			  var slideIndex = 0;
+			showSlides();
+	
+			function showSlides() {
+			var i;
+			var slides = document.getElementsByClassName("mySlides");
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {slideIndex = 1}
+			slides[slideIndex-1].style.display = "block";
+			setTimeout(showSlides, 2000); // Change image every 2 seconds
+			}
+	  </script>
 </section><!--Destop Section main end-->
 
 
@@ -50,30 +49,26 @@
 	<!-- ============================ COMPONENT BOOTSTRAP CARD WITH  IMG ================================= -->
 	<div class="row">
 		<div class="col-md-4">
-			<div class="card">
-			  <img src="{%static 'images/banners/slide4.jpg' %}" class="card-img mobSlides">
-			  <img src="{%static 'images/banners/slide1.jpg' %}" class="card-img mobSlides">
-			  <img src="{%static 'images/banners/slide2.jpg' %}" class="card-img mobSlides">
-			  <img src="{%static 'images/banners/slide3.jpg' %}" class="card-img mobSlides">
+			<div class="card" id="mobimg">
+			  <img src="{%static 'images/banners/slide4.jpg' %}" class="card-img">
 			</div>
 		</div> <!-- col.// -->
 	</div>
 	<script>
-		var slideIndex = 0;
-		showSlides();
-
-		function showSlides() {
-		var i;
-		var slides = document.getElementsByClassName("mobSlides");
-		for (i = 0; i < slides.length; i++) {
-			slides[i].style.display = "none";
+		var images2 = ["{%static 'images/banners/slide1.jpg' %}", "{%static 'images/banners/slide2.jpg' %}", "{%static 'images/banners/slide3.jpg' %}", "{%static 'images/banners/slide4.jpg' %}"];
+		var x2 = 0;
+		var imgs2 = document.getElementById('mobimg');
+		setInterval(slider, 2000);
+		function slider() {
+		  if (x2 < images2.length) {
+			x2 = x2 + 1;
+		  } else {
+			x2 = 1;
+		  }
+		  imgs2.innerHTML = "<img src=\"" + images2[x2 - 1] +"\""+ "class='card-img'>";
+	
 		}
-		slideIndex++;
-		if (slideIndex > slides.length) {slideIndex = 1}
-		slides[slideIndex-1].style.display = "block";
-		setTimeout(showSlides, 2000); // Change image every 2 seconds
-		}
-	</script>
+	  </script>
 </section><!--Mobole Section Main end-->
 
 
