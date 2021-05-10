@@ -85,8 +85,12 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ecom',
+        'USER': 'root',
+        'PASSWORD': 'CGnBAE@u^gUS',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
