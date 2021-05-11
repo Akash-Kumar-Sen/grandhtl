@@ -16,10 +16,8 @@
 	<!-- ============================ COMPONENT BANNER Desktop================================= -->
 	<div class="desktop-banner container" style="min-height:500px;border-radius: 0px;margin-top: 20px;">
 		<a href="{% url 'store' %}">
-		<img src="{%static 'images/banners/slide4.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
-		<img src="{%static 'images/banners/slide1.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
-		<img src="{%static 'images/banners/slide2.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
-		<img src="{%static 'images/banners/slide3.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
+		<img src="{%static 'images/banners/banner1.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
+		<img src="{%static 'images/banners/banner2.jpg' %}" style="width:100%;height: 500px;" class="mySlides">
 		</a>
 	</div>
 	<!-- ============================ COMPONENT BANNER 7  END .// =========================== -->
@@ -44,16 +42,14 @@
 
 
 <!-- ========================= SECTION MAIN Mobile// ========================= -->
-<section class="mb-2 scroll-horizontal mobile-banner" style="margin-top: 0px;padding-top: 0px;">
+<section class="mb-2 mobile-banner" style="margin-top: 0px;padding-top: 0px;">
 
 	<!-- ============================ COMPONENT BOOTSTRAP CARD WITH  IMG ================================= -->
 	<div class="row">
 		<div class="col-md-4">
 			<div class="card" id="mobimg">
-				<img src="{%static 'images/banners/slide4.jpg' %}"  class="mySlides2">
-				<img src="{%static 'images/banners/slide1.jpg' %}"  class="mySlides2">
-				<img src="{%static 'images/banners/slide2.jpg' %}"  class="mySlides2">
-				<img src="{%static 'images/banners/slide3.jpg' %}"  class="mySlides2">
+				<img src="{%static 'images/banners/banner1.jpg' %}"  class="mySlides2" style="max-height: 200px;">
+				<img src="{%static 'images/banners/banner2.jpg' %}"  class="mySlides2" style="max-height: 200px;">
 			</div>
 		</div> <!-- col.// -->
 	</div>
@@ -77,26 +73,33 @@
 
 
 <!--Rounder category list for mobile view-->
-<!-- ========================= SECTION  1========================= -->
-	<div class="container round-category">
-		<header class="section-heading">
-			<a href="{% url 'store' %}" class="btn btn-outline-danger float-right">See all</a>
-			<h4 class="section-title"><strong>Categories</strong></h4>
-		</header><!-- sect-heading -->
+<div class="container round-category">
+	<header class="section-heading">
+		<a href="{% url 'store' %}" class="btn btn-outline-danger float-right">See all</a>
+		<h4 class="section-title"><strong>Categories</strong></h4>
+	</header><!-- sect-heading -->
 
-		<div class="row">
-			{% for category in categories %}
-			  <div class="col-4 col-md-3">
-				<a href="{{category.get_url}}" class="img-wrap"> <img src="{{ category.cat_image.url }}" style="height: 5rem; width: 5rem; border-radius: 100%; border: 0.3rem solid #dc3545;"> </a>
-				<div class="wrap-text">
-					<p style="text-align: center;margin-bottom: 1rem;">{{category.category_name}}</p>
-				</div>
-			  </div>
-			{% endfor %}
-		</div><!--Row end-->
-	</div>
-<!--Round category ends-->
-
+	<div class="row">
+		  <div class="col-4 col-md-3">
+			<a href="#" class="img-wrap"> <img src="{%static 'images/hotel_img.jpg' %}" style="height: 5rem; width: 5rem; border-radius: 100%; border: 0.3rem solid #dc3545;"> </a>
+			<div class="wrap-text">
+				<p style="text-align: center;margin-bottom: 1rem;">{{category.category_name}}</p>
+			</div>
+		  </div>
+		  <div class="col-4 col-md-3">
+			<a href="#" class="img-wrap"> <img src="{%static 'images/apartment_img.jpg' %}" style="height: 5rem; width: 5rem; border-radius: 100%; border: 0.3rem solid #dc3545;"> </a>
+			<div class="wrap-text">
+				<p style="text-align: center;margin-bottom: 1rem;">{{category.category_name}}</p>
+			</div>
+		  </div>
+		  <div class="col-4 col-md-3">
+			<a href="#" class="img-wrap"> <img src="{%static 'images/vaccancy_img.jpg' %}" style="height: 5rem; width: 5rem; border-radius: 100%; border: 0.3rem solid #dc3545;"> </a>
+			<div class="wrap-text">
+				<p style="text-align: center;margin-bottom: 1rem;">{{category.category_name}}</p>
+			</div>
+		  </div>
+	</div><!--Row end-->
+</div>
 <!--Latest products-->
 <div class="mobile-appear">
 	<h4 class="title-section"><strong>New arrival</strong></h4>
